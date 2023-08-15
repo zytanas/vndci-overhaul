@@ -68,7 +68,7 @@ const Dashboard = () => {
       {!isLoading && (
         <section>
           <div className="md:flex justify-around">
-            <div className="w-80 h-80 mx-auto md:m-0">
+            <div className="w-60 h-50 mx-auto md:m-0">
               <h3 className="text-slate-600 text-center mt-3 mb-4">Purchase Orders</h3>
               <Doughnut
                 data={{
@@ -95,7 +95,7 @@ const Dashboard = () => {
               />
             </div>
 
-            <div className="w-80 h-80 mt-12 mx-auto md:m-0">
+            <div className="w-60 h-50 mt-12 mx-auto md:m-0">
               <h3 className="text-slate-600 text-center mt-3 mb-4">Purchase Returns</h3>
               <Doughnut
                 data={{
@@ -117,23 +117,44 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="md:max-w-xl mt-12 mx-auto px-2 mb-6 nd:mb-0">
-            <Bar
-              options={options}
-              data={{
-                labels: ["On Stock", "Low On Stock", "Out Of Stock"],
-                datasets: [
-                  {
-                    data: [
-                      dashboardData.items.onStock,
-                      dashboardData.items.lowOnStock,
-                      dashboardData.items.outOfStock,
-                    ],
-                    backgroundColor: ["#4ade80", "#eab308", "#fca5a5"],
-                  },
-                ],
-              }}
-            />
+          <div className="md:flex justify-around mt-12">
+            <div className="md:max-w-xl mx-auto px-2 mb-6 md:mb-0">
+              <Bar
+                options={options}
+                data={{
+                  labels: ["On Stock", "Low On Stock", "Out Of Stock"],
+                  datasets: [
+                    {
+                      data: [
+                        dashboardData.items.onStock,
+                        dashboardData.items.lowOnStock,
+                        dashboardData.items.outOfStock,
+                      ],
+                      backgroundColor: ["#4ade80", "#eab308", "#fca5a5"],
+                    },
+                  ],
+                }}
+              />
+            </div>
+
+            <div className="md:max-w-xl mx-auto px-2 mb-6 md:mb-0">
+              <Bar
+                options={options}
+                data={{
+                  labels: ["On Stock", "Low On Stock", "Out Of Stock"],
+                  datasets: [
+                    {
+                      data: [
+                        dashboardData.items.onStock,
+                        dashboardData.items.lowOnStock,
+                        dashboardData.items.outOfStock,
+                      ],
+                      backgroundColor: ["#4ade80", "#eab308", "#fca5a5"],
+                    },
+                  ],
+                }}
+              />
+            </div>
           </div>
         </section>
       )}

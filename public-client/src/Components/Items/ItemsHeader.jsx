@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Input, message, Modal, Radio, Select } from "antd";
-import { QrReader } from "react-qr-reader";
+// import { QrReader } from "react-qr-reader";
 import { PlusIcon, QrCodeIcon, XMarkIcon} from "@heroicons/react/24/outline";
 
 import {
@@ -13,9 +13,9 @@ import { useSelector } from "react-redux";
 const ItemsHeader = ({
   searchText,
   setSearchText,
-  setIsSearchQrModalVisible,
-  setSortby,
-  setSortorder,
+  // setIsSearchQrModalVisible,
+  // setSortby,
+  // setSortorder,
 }) => {
   const auth = useSelector((state) => state.auth);
 
@@ -26,7 +26,7 @@ const ItemsHeader = ({
   // local states
   const [isCreateItemModalVisible, setIsCreateItemModalVisible] =
     useState(false);
-  const [isQrModalVisible, setIsQrModalVisible] = useState(false);
+  // const [isQrModalVisible, setIsQrModalVisible] = useState(false);
 
   // create item states
   const [name, setName] = useState("");
@@ -37,7 +37,7 @@ const ItemsHeader = ({
   const [category, setCategory] = useState("Others");
   const [stockWarningQuantity, setStockWarningQuantity] = useState(null);
   const [expiryDate, setExpiryDate] = useState("");
-  const [qrText, setQrText] = useState("");
+  // const [qrText, setQrText] = useState("");
   const [newCategoryName, setNewCategoryName] = useState("");
 
   // handles
@@ -51,7 +51,7 @@ const ItemsHeader = ({
     createItem({
       name,
       qty,
-      sku: sku || qrText,
+      sku: sku,
       shelf,
       status,
       category,
@@ -69,7 +69,7 @@ const ItemsHeader = ({
 
   return (
     <>
-      <div className="flex items-start md:items-center md:justify-around  md:mt-4 flex-col md:flex-row">
+      <div className="flex items-start md:items-center md:justify-between md:mt-4 flex-col md:flex-row">
         <div className="md:flex gap-4">
           <Button
             type="primary"
@@ -86,7 +86,8 @@ const ItemsHeader = ({
             <span>Create Item</span>
           </Button>
 
-          <div className="flex items-center justify-center gap-2 mt-2 md:mt-0">
+          {/* sort, ascending and descending*/}
+          {/* <div className="flex items-center justify-center gap-2 mt-2 md:mt-0">
             <Select
               placeholder="Sort"
               className="min-w-[100px]"
@@ -102,9 +103,9 @@ const ItemsHeader = ({
               <Radio.Button value="asc">Ascending</Radio.Button>
               <Radio.Button value="desc">Descending</Radio.Button>
             </Radio.Group>
-          </div>
+          </div> */}
         </div>
-
+        
         <div className="flex items-center justify-center gap-x-1 mt-2 md:mt-0">
           <Input.Group compact>
             <Input
@@ -118,12 +119,12 @@ const ItemsHeader = ({
               Search
             </Button>
           </Input.Group>
-          <Button
+          {/* <Button
             type="dashed"
             onClick={() => setIsSearchQrModalVisible((prev) => !prev)}
           >
             <QrCodeIcon className="h-5 w-5" />
-          </Button>
+          </Button> */}
         </div>
       </div>
 
@@ -150,20 +151,21 @@ const ItemsHeader = ({
         ]}
       >
         <div className="flex gap-2 mb-2">
+          {/* commentend out QR-related input
           {qrText ? (
             <Input
               placeholder="Enter SKU"
               value={qrText}
               onChange={(e) => setQrText(e.target.value)}
             />
-          ) : (
+          ) : ( */}
             <Input
               placeholder="Enter SKU"
               value={sku}
               onChange={(e) => setSku(e.target.value)}
             />
-          )}
-
+          
+          {/* commentend out QR-related input
           <Button
             type="dashed"
             onClick={() => {
@@ -172,7 +174,7 @@ const ItemsHeader = ({
             }}
           >
             <QrCodeIcon className="h-5 w-5" />
-          </Button>
+          </Button> */}
         </div>
 
         <Input
@@ -255,11 +257,11 @@ const ItemsHeader = ({
         />
       </Modal>
 
-      <Modal
+      {/* <Modal
         title="QR Scanner"
         open={isQrModalVisible}
         onCancel={() => {
-          setIsQrModalVisible((prev) => !prev);
+          // setIsQrModalVisible((prev) => !prev);
           setIsCreateItemModalVisible((prev) => !prev);
         }}
         footer={[
@@ -296,7 +298,7 @@ const ItemsHeader = ({
           }}
           style={{ width: "100%" }}
         />
-      </Modal>
+      </Modal> */}
     </>
   );
 };

@@ -83,7 +83,8 @@ const OrdersHeader = ({
             <span>Add Order</span>
           </Button>
 
-          <div className="flex items-center justify-center gap-2 mt-2 md:mt-0">
+          {/* sort, ascending and descending*/}
+          {/* <div className="flex items-center justify-center gap-2 mt-2 md:mt-0">
             <Select
               placeholder="Sort"
               className="min-w-[100px]"
@@ -99,7 +100,7 @@ const OrdersHeader = ({
               <Radio.Button value="asc">Ascending</Radio.Button>
               <Radio.Button value="desc">Descending</Radio.Button>
             </Radio.Group>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex items-center justify-center gap-x-1 mt-2 md:mt-0">

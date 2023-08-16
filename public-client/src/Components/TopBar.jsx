@@ -20,7 +20,7 @@ import {
   ListBulletIcon,
   TruckIcon,
   HashtagIcon,
-  ServerStackIcon,
+  FunnelIcon,
   TagIcon,
   UsersIcon,
   Cog6ToothIcon,
@@ -272,22 +272,22 @@ const TopBar = () => {
             </div>
           )}
 
-          {/* {auth.userData.permissions.archives.includes("R") && (
+          {auth.userData.permissions.archives.includes("R") && (
             <div
               className={`shadow px-4 py-3 cursor-pointer rounded-m sm:my-6 my-4 flex items-center justify-between hover:bg-primary hover:text-white transition-all duration-150 ease-out ${location.pathname === "/archives" && "text-white bg-primary"
                 }`}
               onClick={() => {
                 // dispatch(toggleDrawer());
-                navigate("/archives");
+                navigate("/category");
               }}
             >
               <div className="flex items-center justify-center gap-x-3">
-                <ServerStackIcon className="w-6 h-6" />
-                <span className="font-bold ">Archives</span>
+                <FunnelIcon className="w-6 h-6" />
+                <span className="font-bold ">Category</span>
               </div>
               <ChevronRightIcon className="w-5 h-5 text-primary" />
             </div>
-          )} */}
+          )}
 
           {auth.userData.role === "Admin" && (
             <div

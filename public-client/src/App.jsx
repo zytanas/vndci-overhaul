@@ -12,6 +12,7 @@ import Returns from "./Pages/Returns";
 import Vendors from "./Pages/Vendors";
 import Logs from "./Pages/Logs";
 import Users from "./Pages/Users";
+import Category from "./Pages/Category"
 // import Archives from "./Pages/Archives";
 
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
             <Route path="/returns" element={<Returns />} />
             <Route path="/vendors" element={<Vendors />} />
             <Route path="/logs" element={<Logs />} />
+            <Route path="/category" element={<Category />} />
             <Route path="/users" element={<Users />} />
           </Route>
         </Routes>

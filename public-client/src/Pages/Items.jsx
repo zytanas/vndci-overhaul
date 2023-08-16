@@ -49,7 +49,7 @@ const Items = () => {
   const [name, setName] = useState("");
   const [qty, setQty] = useState(null);
   const [sku, setSku] = useState("");
-  const [shelf, setShelf] = useState("");
+  const [price, setPrice] = useState("");
   const [status, setStatus] = useState("");
   const [category, setCategory] = useState("");
   const [stockWarningQuantity, setStockWarningQuantity] = useState(null);
@@ -131,7 +131,7 @@ const Items = () => {
       !name &&
       !qty &&
       !sku &&
-      !shelf &&
+      !price &&
       !status &&
       !category &&
       !stockWarningQuantity &&
@@ -144,7 +144,7 @@ const Items = () => {
     if (name) data.name = name;
     if (qty) data.qty = qty;
     if (sku) data.sku = sku;
-    if (shelf) data.shelf = shelf;
+    if (price) data.price = price;
     if (status) data.status = status;
     if (category) data.category = category;
     if (stockWarningQuantity) data.low_stock_warning_qty = stockWarningQuantity;
@@ -198,9 +198,9 @@ const Items = () => {
       responsive: ["md"],
     },
     {
-      title: "Shelf",
-      dataIndex: "shelf",
-      key: "shelf",
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
     },
     {
       title: "Action",
@@ -224,7 +224,7 @@ const Items = () => {
               setName(item.name);
               setQty(item.qty);
               setSku(item.sku);
-              setShelf(item.shelf);
+              setPrice(item.shelf);
               setStatus(item.status);
               setCategory(item.category);
               setStockWarningQuantity(item.low_stock_warning_qty);
@@ -332,8 +332,8 @@ const Items = () => {
           />
           <Input
             placeholder="Enter Shelf"
-            value={shelf}
-            onChange={(e) => setShelf(e.target.value)}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             className="ml-2"
           />
         </div>

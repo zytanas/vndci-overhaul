@@ -32,7 +32,7 @@ const ItemsHeader = ({
   const [name, setName] = useState("");
   const [qty, setQty] = useState(null);
   const [sku, setSku] = useState("");
-  const [shelf, setShelf] = useState("");
+  const [price, setPrice] = useState("");
   const [status, setStatus] = useState("on stock");
   const [category, setCategory] = useState("Others");
   const [stockWarningQuantity, setStockWarningQuantity] = useState(null);
@@ -52,7 +52,7 @@ const ItemsHeader = ({
       name,
       qty,
       sku: sku,
-      shelf,
+      price,
       status,
       category,
       low_stock_warning_qty: stockWarningQuantity,
@@ -192,9 +192,9 @@ const ItemsHeader = ({
             type="number"
           />
           <Input
-            placeholder="Enter Shelf"
-            value={shelf}
-            onChange={(e) => setShelf(e.target.value)}
+            placeholder="Enter Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             className="ml-2"
           />
         </div>

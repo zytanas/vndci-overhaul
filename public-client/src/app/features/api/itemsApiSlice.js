@@ -3,7 +3,7 @@ import config from "../../../config/config";
 
 export const itemsApiSlice = createApi({
   reducerPath: "itemsApiSlice",
-  tagTypes: ["Items", "Categories", "Archives", "Warning"],
+  tagTypes: ["Items", "Archives", "Warning"],
 
   // eslint-disable-next-line no-undef
   baseQuery: fetchBaseQuery({
@@ -72,21 +72,21 @@ export const itemsApiSlice = createApi({
       }),
     }),
 
-    // get all categories
-    getCategories: builder.query({
-      query: () => `/api/items/categories`,
-      providesTags: ["Categories"],
-    }),
+    // // get all categories
+    // getCategories: builder.query({
+    //   query: () => `/api/items/categories`,
+    //   providesTags: ["Categories"],
+    // }),
 
-    // add category
-    addCategory: builder.mutation({
-      query: (body) => ({
-        url: "/api/items/add-category",
-        method: "POST",
-        body,
-      }),
-      invalidatesTags: ["Categories"],
-    }),
+    // // add category
+    // addCategory: builder.mutation({
+    //   query: (body) => ({
+    //     url: "/api/items/add-category",
+    //     method: "POST",
+    //     body,
+    //   }),
+    //   invalidatesTags: ["Categories"],
+    // }),
 
     // get warning
     getWarning: builder.query({
@@ -120,8 +120,8 @@ export const {
   useItemUseMutation,
   useUpdateItemMutation,
   useSearchItemsQuery,
-  useGetCategoriesQuery,
-  useAddCategoryMutation,
+  // useGetCategoriesQuery,
+  // useAddCategoryMutation,
   useGetWarningQuery,
   // useArchiveItemMutation,
   // useGetArchivedItemsQuery,

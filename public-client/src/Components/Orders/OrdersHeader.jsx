@@ -38,7 +38,7 @@ const OrdersHeader = ({
   const [orderDetails, setOrderDetails] = useState("");
 
   // handles
-  const handleSearch = () => {};
+  const handleSearch = () => { };
   const handleCreateItem = () => {
     if (!invoiceNumber || !orderDate || !deliveryDate || !orderDetails) {
       message.error(
@@ -66,24 +66,23 @@ const OrdersHeader = ({
 
   return (
     <>
-      <div className="flex items-start md:items-center md:justify-around  md:mt-4 flex-col md:flex-row">
-        <div className="md:flex gap-4">
-          <Button
-            type="primary"
-            className="font-bold bg-green-500 flex items-center justify-center gap-x-2"
-            onClick={() => setIsCreateItemModalVisible((prev) => !prev)}
-            disabled={
-              !(
-                auth.permissions.orders.includes("W") ||
-                auth.permissions.orders.includes("D")
-              )
-            }
-          >
-            <PlusIcon className="h-5 w-5 " />
-            <span>Add Order</span>
-          </Button>
-
-          {/* sort, ascending and descending*/}
+      <div className="flex items-start md:items-center md:justify-between md:mt-4 flex-col md:flex-row">
+        <Button
+          type="primary"
+          className="font-bold bg-green-500 flex items-center justify-center gap-x-2"
+          onClick={() => setIsCreateItemModalVisible((prev) => !prev)}
+          disabled={
+            !(
+              auth.permissions.orders.includes("W") ||
+              auth.permissions.orders.includes("D")
+            )
+          }
+        >
+          <PlusIcon className="h-5 w-5" />
+          <span>Add Order</span>
+        </Button>
+        
+        {/* sort, ascending and descending*/}
           {/* <div className="flex items-center justify-center gap-2 mt-2 md:mt-0">
             <Select
               placeholder="Sort"
@@ -101,21 +100,21 @@ const OrdersHeader = ({
               <Radio.Button value="desc">Descending</Radio.Button>
             </Radio.Group>
           </div> */}
-        </div>
+        {/* </div> */}
 
-        <div className="flex items-center justify-center gap-x-1 mt-2 md:mt-0">
-          <Input.Group compact>
-            <Input
-              style={{ width: "calc(100% - 100px)" }}
-              allowClear
-              placeholder="Enter keyword"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-            <Button type="primary" onClick={handleSearch}>
-              Search
-            </Button>
-          </Input.Group>
+        <div>
+        <Input.Group compact className="md:mt-2">
+          <Input
+            style={{ width: "200px" }}
+            allowClear
+            placeholder="Enter keyword"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <Button type="primary" onClick={handleSearch}>
+            Search
+          </Button>
+        </Input.Group>
         </div>
       </div>
 
@@ -197,10 +196,10 @@ const OrdersHeader = ({
             options={
               data?.vendors
                 ? data.vendors.map((vendor) => {
-                    return {
-                      value: vendor.display_name,
-                    };
-                  })
+                  return {
+                    value: vendor.display_name,
+                  };
+                })
                 : []
             }
             placeholder="Type for autocomplete"

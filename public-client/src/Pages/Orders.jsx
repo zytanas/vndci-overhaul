@@ -12,7 +12,6 @@ import {
 } from "antd";
 import OrdersHeader from "../Components/Orders/OrdersHeader";
 import {
-  useArchiveOrderMutation,
   useChangeOrderStatusMutation,
   useDeleteOrderMutation,
   useEditOrderMutation,
@@ -46,7 +45,7 @@ const Orders = () => {
   const [changeOrderStatus] = useChangeOrderStatusMutation();
   const [createReturn, result] = useCreateReturnMutation();
   const [editOrder, resultEdit] = useEditOrderMutation();
-  const [archiveOrder] = useArchiveOrderMutation();
+  // const [archiveOrder] = useArchiveOrderMutation();
 
   // local states
   const [isReturnModalVisible, setIsReturnModalVisible] = useState(false);

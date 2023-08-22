@@ -12,10 +12,10 @@ import {
   Table,
 } from "antd";
 import {
-  // useAddCategoryMutation,
+  useAddCategoryMutation,
   // useArchiveItemMutation,
   useDeleteItemMutation,
-  // useGetCategoriesQuery,
+  useGetCategoriesQuery,
   useGetItemsQuery,
   useItemUseMutation,
   useSearchItemsQuery,
@@ -43,13 +43,13 @@ const Items = () => {
   const [editSelecedItem, setEditSelecedItem] = useState(null);
   const [useSelecedItem, setUseSelecedItem] = useState(null);
   const [usedAmount, setUsedAmount] = useState("");
-  // const [newCategoryName, setNewCategoryName] = useState("");
+  const [newCategoryName, setNewCategoryName] = useState("");
 
   // update item states
   const [name, setName] = useState("");
   const [qty, setQty] = useState(null);
   const [sku, setSku] = useState("");
-  const [price, setPrice] = useState(0); // Corrected initial state
+  const [price, setPrice] = useState("");
   const [status, setStatus] = useState("");
   const [category, setCategory] = useState("");
   const [stockWarningQuantity, setStockWarningQuantity] = useState(null);
@@ -64,12 +64,12 @@ const Items = () => {
     useSearchItemsQuery(searchText, {
       skip: !searchText,
     });
-  // const { data: categoriesData } = useGetCategoriesQuery();
+  const { data: categoriesData } = useGetCategoriesQuery();
   const [deleteItem] = useDeleteItemMutation();
   // const [archiveItem, archiveResult] = useArchiveItemMutation();
   const [itemUse, useResult] = useItemUseMutation();
   const [updateItem, updateResult] = useUpdateItemMutation();
-  // const [addCategory, addCategoryResult] = useAddCategoryMutation();
+  const [addCategory, addCategoryResult] = useAddCategoryMutation();
 
   // handling sku search
   useEffect(() => {
@@ -133,23 +133,18 @@ const Items = () => {
       !sku &&
       !price &&
       !status &&
+      !category &&
       !stockWarningQuantity &&
       !expiryDate
     )
       return message.error("Please enter at least one field to update");
-
-    // Parse the price and check if it's valid
-    const parsedPrice = parseFloat(price);
-    if (isNaN(parsedPrice)) {
-      return message.error("Price must be a valid number!");
-    }
 
     let data = {};
 
     if (name) data.name = name;
     if (qty) data.qty = qty;
     if (sku) data.sku = sku;
-    data.price = parsedPrice.toFixed(2);
+    if (price) data.price = price;
     if (status) data.status = status;
     if (category) data.category = category;
     if (stockWarningQuantity) data.low_stock_warning_qty = stockWarningQuantity;
@@ -206,7 +201,6 @@ const Items = () => {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (price) => `₱${parseFloat(price).toFixed(2)}`,
     },
     {
       title: "Action",
@@ -230,7 +224,7 @@ const Items = () => {
               setName(item.name);
               setQty(item.qty);
               setSku(item.sku);
-              setPrice(item.price);
+              setPrice(item.shelf);
               setStatus(item.status);
               setCategory(item.category);
               setStockWarningQuantity(item.low_stock_warning_qty);
@@ -249,8 +243,8 @@ const Items = () => {
               )
             }
           >
-            <PencilIcon className="h-5 w-5 " />
-
+             <PencilIcon className="h-5 w-5 " />
+            
           </Button>
         </div>
       ),
@@ -337,31 +331,23 @@ const Items = () => {
             type="number"
           />
           <Input
-            placeholder="Enter Price"
+            placeholder="Enter Shelf"
             value={price}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              if (!isNaN(newValue)) {
-                setPrice(parseFloat(newValue));
-              }
-            }}
+            onChange={(e) => setPrice(e.target.value)}
             className="ml-2"
-            type="number"
           />
         </div>
 
-        <label htmlFor="expiryDateInput">Enter Expiry Date:</label>
         <Input
-          placeholder="MM-DD-YYYY"
+          placeholder="Enter expiry date (MM-DD-YYYY)"
           className="my-2"
           type="date"
           value={expiryDate}
           onChange={(e) => setExpiryDate(e.target.value)}
         />
 
-        {/* categories */}
-        {/* <div className="flex my-3 justify-around gap-x-2"> */}
-        {/* <Select
+        <div className="flex my-3 justify-around gap-x-2">
+          <Select
             placeholder="Select Category"
             onChange={(e) => setCategory(e)}
             options={
@@ -374,8 +360,8 @@ const Items = () => {
             placeholder="Enter a new category"
             value={newCategoryName}
             onChange={(e) => setNewCategoryName(e.target.value)}
-          /> */}
-        {/* <Button
+          />
+          <Button
             loading={addCategoryResult.isLoading}
             onClick={() => {
               addCategory({ name: newCategoryName }).then((res) => {
@@ -389,8 +375,8 @@ const Items = () => {
             }}
           >
             Add
-          </Button> */}
-        {/* </div> */}
+          </Button>
+        </div>
         <Select
           placeholder="Select Status"
           onChange={(e) => setStatus(e)}

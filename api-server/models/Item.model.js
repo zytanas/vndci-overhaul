@@ -14,8 +14,8 @@ const itemSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    price: {
-      type: Number,
+    shelf: {
+      type: String,
       default: "unknown",
     },
     status: {

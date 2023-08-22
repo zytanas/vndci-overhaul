@@ -4,7 +4,9 @@ import { Button, Input, message, Modal, Radio, Select } from "antd";
 import { PlusIcon, QrCodeIcon, XMarkIcon} from "@heroicons/react/24/outline";
 
 import {
+  useAddCategoryMutation,
   useCreateItemMutation,
+  useGetCategoriesQuery,
 } from "../../app/features/api/itemsApiSlice";
 import { useSelector } from "react-redux";
 
@@ -17,9 +19,9 @@ const ItemsHeader = ({
 }) => {
   const auth = useSelector((state) => state.auth);
 
-  // const { data: categoriesData } = useGetCategoriesQuery();
+  const { data: categoriesData } = useGetCategoriesQuery();
   const [createItem, result] = useCreateItemMutation();
-  // const [addCategory, addCategoryResult] = useAddCategoryMutation();
+  const [addCategory, addCategoryResult] = useAddCategoryMutation();
 
   // local states
   const [isCreateItemModalVisible, setIsCreateItemModalVisible] =
@@ -30,9 +32,9 @@ const ItemsHeader = ({
   const [name, setName] = useState("");
   const [qty, setQty] = useState(null);
   const [sku, setSku] = useState("");
-  const [price, setPrice] = useState("")
+  const [price, setPrice] = useState("");
   const [status, setStatus] = useState("on stock");
-  // const [category, setCategory] = useState("Others");
+  const [category, setCategory] = useState("Others");
   const [stockWarningQuantity, setStockWarningQuantity] = useState(null);
   const [expiryDate, setExpiryDate] = useState("");
   // const [qrText, setQrText] = useState("");
@@ -46,18 +48,13 @@ const ItemsHeader = ({
       message.error("Name and Quantity are required!");
       return;
     }
-    if (isNaN(price)){
-      message.error("Price must be a valid number!");
-      return;
-    }
-    const formattedPrice = parseFloat(price).toFixed(2);
-
     createItem({
       name,
       qty,
       sku: sku,
-      price: formattedPrice,
+      price,
       status,
+      category,
       low_stock_warning_qty: stockWarningQuantity,
       expiry_date: expiryDate,
     }).then((res) => {
@@ -197,27 +194,20 @@ const ItemsHeader = ({
           <Input
             placeholder="Enter Price"
             value={price}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              if (!isNaN(newValue)) {
-                setPrice(parseFloat(newValue));
-              }
-            }}
+            onChange={(e) => setPrice(e.target.value)}
             className="ml-2"
-            type="number"
           />
         </div>
-        
-        <label htmlFor="expiryDateInput">Enter Expiry Date:</label>
+
         <Input
-          placeholder="MM-DD-YYYY"
+          placeholder="Enter expiry date (MM-DD-YYYY)"
           className="my-2"
           type="date"
           value={expiryDate}
           onChange={(e) => setExpiryDate(e.target.value)}
         />
 
-        {/* <div className="flex my-3 justify-around gap-x-2">
+        <div className="flex my-3 justify-around gap-x-2">
           <Select
             placeholder="Select Category"
             onChange={(e) => setCategory(e)}
@@ -247,7 +237,7 @@ const ItemsHeader = ({
           >
             Add
           </Button>
-        </div> */}
+        </div>
         <Select
           defaultValue="on stock"
           value={status}

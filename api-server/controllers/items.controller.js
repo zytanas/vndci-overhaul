@@ -1,6 +1,6 @@
 const ItemModel = require("../models/Item.model");
 const LogModel = require("../models/Log.model");
-// const CategoryModel = require("../models/Category.model");
+const CategoryModel = require("../models/Category.model");
 const { format, differenceInDays } = require("date-fns");
 
 const getAllItems = async (req, res) => {
@@ -59,7 +59,7 @@ const createItem = async (req, res) => {
     name,
     qty,
     sku,
-    price,
+    shelf,
     status,
     category,
     low_stock_warning_qty,
@@ -77,7 +77,7 @@ const createItem = async (req, res) => {
       name,
       qty,
       sku,
-      price,
+      shelf,
       status,
       category,
       low_stock_warning_qty: Number(low_stock_warning_qty),
@@ -262,46 +262,46 @@ const searchItems = async (req, res) => {
 };
 
 // add category
-// const addCategory = async (req, res) => {
-//   const { name } = req.body;
+const addCategory = async (req, res) => {
+  const { name } = req.body;
 
-//   if (!name)
-//     return res
-//       .status(400)
-//       .json({ success: false, message: "Missing required fields" });
+  if (!name)
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing required fields" });
 
-//   try {
-//     const category = await CategoryModel.create({ name });
+  try {
+    const category = await CategoryModel.create({ name });
 
-//     if (!category)
-//       return res.status(500).json({ success: false, message: "Server error" });
+    if (!category)
+      return res.status(500).json({ success: false, message: "Server error" });
 
-//     return res.status(201).json({
-//       success: true,
-//       message: "Category created successfully",
-//       category,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json({ success: false, message: "Server error" });
-//   }
-// };
+    return res.status(201).json({
+      success: true,
+      message: "Category created successfully",
+      category,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+};
 
 // get all categories
-// const getAllCategories = async (req, res) => {
-//   try {
-//     const categories = await CategoryModel.find();
+const getAllCategories = async (req, res) => {
+  try {
+    const categories = await CategoryModel.find();
 
-//     return res.status(200).json({
-//       success: true,
-//       message: "Categories fetched successfully",
-//       categories,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json({ success: false, message: "Server error" });
-//   }
-// };
+    return res.status(200).json({
+      success: true,
+      message: "Categories fetched successfully",
+      categories,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+};
 
 // get warning when the stock qty is less than low_stock_warning_qty of the item
 const getWarning = async (req, res) => {
@@ -404,6 +404,8 @@ module.exports = {
   deleteItem,
   useItem,
   searchItems,
+  addCategory,
+  getAllCategories,
   getWarning,
   getAllArchivedItems,
   archiveItem,

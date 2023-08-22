@@ -244,7 +244,7 @@ const TopBar = () => {
                 }`}
               onClick={() => {
                 // dispatch(toggleDrawer());
-                navigate("/suppliers");
+                navigate("/vendors");
               }}
             >
               <div className="flex items-center justify-center gap-x-3">

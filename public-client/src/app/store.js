@@ -7,7 +7,6 @@ import { ordersApiSlice } from "./features/api/ordersApiSlice";
 import { returnsApiSlice } from "./features/api/returnsApiSlice";
 import { vendorsApiSlice } from "./features/api/vendorsApiSlice";
 import { logsApiSlice } from "./features/api/logsApiSlice";
-import { categoryApiSlice } from "./features/api/categoryApiSlice";
 import { dashboardApiSlice } from "./features/api/dashboardApiSlice";
 
 export const store = configureStore({
@@ -18,7 +17,6 @@ export const store = configureStore({
     [returnsApiSlice.reducerPath]: returnsApiSlice.reducer,
     [vendorsApiSlice.reducerPath]: vendorsApiSlice.reducer,
     [logsApiSlice.reducerPath]: logsApiSlice.reducer,
-    [categoryApiSlice.reducerPath]: categoryApiSlice.reducer,
     [dashboardApiSlice.reducerPath]: dashboardApiSlice.reducer,
     auth: authReducer,
     root: rootReducer,
@@ -31,6 +29,5 @@ export const store = configureStore({
       .concat(returnsApiSlice.middleware)
       .concat(vendorsApiSlice.middleware)
       .concat(logsApiSlice.middleware)
-      .concat(categoryApiSlice.middleware)
       .concat(dashboardApiSlice.middleware),
 });
